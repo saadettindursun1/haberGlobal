@@ -1,0 +1,35 @@
+<hr>
+<button mat-flat-button color="accent" routerLink="../adminEkran" style="margin-left:40px;">Geri Dön</button><hr>
+<br>
+<h1 class="text-center">İLETİŞİM KUTUSU</h1>
+<mat-table [dataSource]="iletiler">
+
+    <ng-container matColumnDef="iletisimMail">
+        <mat-header-cell *matHeaderCellDef> Mail
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.iletisimMail}} </mat-cell>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="iletisimIcerik">
+        <mat-header-cell *matHeaderCellDef> İçerik
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.iletisimIcerik}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Silme">
+        <mat-header-cell *matHeaderCellDef> Sil
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> 
+            <button mat-raised-button color="warn" (click)="this.iletiSil(kayit.Id)">Sil</button> 
+     
+                    </mat-cell>
+    </ng-container>
+
+  
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+</mat-table>

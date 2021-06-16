@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="habergModelStoreContainer" CdmEntityContainer="habergEntities1">
+    <EntitySetMapping Name="Haberler">
+      <EntityTypeMapping TypeName="habergModel.Haberler">
+        <MappingFragment StoreEntitySet="Haberler">
+          <ScalarProperty Name="haberId" ColumnName="haberId" />
+          <ScalarProperty Name="haberKategori" ColumnName="haberKategori" />
+          <ScalarProperty Name="haberBaslik" ColumnName="haberBaslik" />
+          <ScalarProperty Name="haberIcerik" ColumnName="haberIcerik" />
+          <ScalarProperty Name="haberResim" ColumnName="haberResim" />
+          <ScalarProperty Name="haberVideo" ColumnName="haberVideo" />
+          <ScalarProperty Name="haberTarih" ColumnName="haberTarih" />
+          <ScalarProperty Name="haberOkunma" ColumnName="haberOkunma" />
+          <ScalarProperty Name="haberYazarId" ColumnName="haberYazarId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HaberYorumlar">
+      <EntityTypeMapping TypeName="habergModel.HaberYorumlar">
+        <MappingFragment StoreEntitySet="HaberYorumlar">
+          <ScalarProperty Name="yorumId" ColumnName="yorumId" />
+          <ScalarProperty Name="yorumIcerik" ColumnName="yorumIcerik" />
+          <ScalarProperty Name="yorumTarih" ColumnName="yorumTarih" />
+          <ScalarProperty Name="yorumHaberId" ColumnName="yorumHaberId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ilceler">
+      <EntityTypeMapping TypeName="habergModel.ilceler">
+        <MappingFragment StoreEntitySet="ilceler">
+          <ScalarProperty Name="ilceId" ColumnName="ilceId" />
+          <ScalarProperty Name="ilceIsim" ColumnName="ilceIsim" />
+          <ScalarProperty Name="ilceSehirId" ColumnName="ilceSehirId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iletisim">
+      <EntityTypeMapping TypeName="habergModel.iletisim">
+        <MappingFragment StoreEntitySet="iletisim">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="iletisimMail" ColumnName="iletisimMail" />
+          <ScalarProperty Name="iletisimIcerik" ColumnName="iletisimIcerik" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategoriler">
+      <EntityTypeMapping TypeName="habergModel.Kategoriler">
+        <MappingFragment StoreEntitySet="Kategoriler">
+          <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+          <ScalarProperty Name="kategoriAdi" ColumnName="kategoriAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sehirler">
+      <EntityTypeMapping TypeName="habergModel.Sehirler">
+        <MappingFragment StoreEntitySet="Sehirler">
+          <ScalarProperty Name="sehirId" ColumnName="sehirId" />
+          <ScalarProperty Name="sehirIsim" ColumnName="sehirIsim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uyeler">
+      <EntityTypeMapping TypeName="habergModel.uyeler">
+        <MappingFragment StoreEntitySet="uyeler">
+          <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+          <ScalarProperty Name="adsoyad" ColumnName="adsoyad" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="parola" ColumnName="parola" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="haberAlan" ColumnName="haberAlan" />
+          <ScalarProperty Name="konum" ColumnName="konum" />
+          <ScalarProperty Name="rol" ColumnName="rol" />
+          <ScalarProperty Name="kayitTarih" ColumnName="kayitTarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

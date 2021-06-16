@@ -1,0 +1,39 @@
+.container {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.slider {
+  height: 850px;
+  float: left;
+}
+.slider img {
+  width: 780px;
+  height: 400px;
+  float: left;
+}
+.sagKose {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.sagKose img {
+  margin-left: 20px;
+  height: 220px;
+  width: 340px;
+  float: left;
+}
+.icerik {
+  margin-top: 400px;
+  background-color: rgb(224, 223, 238);
+}
+.kategori {
+  text-align: center;
+  font-size: 25px;
+}
+.altKategori img {
+  width: 240px;
+  height: 200px;
+  margin: 6px;
+}
+.mySlides {
+  display: none;
+}

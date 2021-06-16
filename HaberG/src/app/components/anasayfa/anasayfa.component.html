@@ -1,0 +1,56 @@
+<div class="justify-content-center align-items-center">
+    <div class="col-md-12">
+    <div id="carouselExampleIndicators" class="carousel slide"  data-ride="carousel">
+      
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="../../../assets/habergSlider.png" alt="First slide">
+        <div class="text-center altBaslik d-none d-md-block" >
+            <span class="kategori">Tıklayın gündemden uzak kalmayın!</span>
+          </div>   
+      </div>
+
+     
+      <div class="carousel-item" *ngFor="let item of haberlerim">
+        <a href="../haberDetay/{{item.haberId}}" style="text-decoration: none;">
+        <img class="d-block w-100"  [src]="'https://localhost:44321/Resimler/'+item.haberResim" >
+        <div class="text-center altBaslik d-none d-md-block">
+            <span class="kategori ">{{item.haberBaslik}}</span>
+          </div>
+        </a>
+      </div>
+  
+    </div>
+    <a class="carousel-control-prev  yay"  href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon "  aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next  yay"  href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+</div>
+
+
+
+<div *ngFor="let item of kategori">
+<div class="col-md-12 mb-5">
+    <div class="altBaslik mt-5  text-center" style="background-color: rgba(138, 150, 144, 0.822);">
+    <span class="kategori"> {{item.kategoriAdi}} </span>
+    </div>
+</div>
+
+
+ <div *ngFor="let item2 of item.haberler" class="col-md-3">  <div class="col-md-12 card  mt-5 ">
+<div class="card-title text-center mt-3"> <img  style="height: 120px;"  [src]="'https://localhost:44321/Resimler/'+item2.haberResim" ></div>
+<div class="card-body text-center"><strong>{{item2.haberBaslik}}</strong> <br>
+  {{item2.haberOkunma}} kez okundu..
+</div>
+<div class="card-footer"><button class="btn btn-lg btn-outline-danger btn-block" routerLink="../haberDetay/{{item2.haberId}}">Detaya Git</button></div>
+
+</div></div>  </div>
+
+
+
+</div>

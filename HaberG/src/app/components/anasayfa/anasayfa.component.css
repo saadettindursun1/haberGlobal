@@ -1,0 +1,26 @@
+img {
+  height: 350px;
+}
+.altBaslik {
+  position: relative;
+  left: 0px;
+  bottom: 0px;
+  height: 50px;
+  background-color: rgba(196, 3, 3, 0.767);
+  color: white;
+  font-size: 20px;
+}
+.kategori {
+  line-height: 50px;
+}
+.yay {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 40%;
+  background-color: black;
+  opacity: 100;
+}
+img {
+  object-fit: contain;
+}

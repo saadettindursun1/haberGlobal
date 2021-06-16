@@ -1,0 +1,66 @@
+<hr>
+<button mat-flat-button color="accent" routerLink="../adminEkran" style="margin-left:40px;">Geri Dön</button><hr>
+<br>
+  <mat-table [dataSource]="uyelerim">
+
+
+    <ng-container matColumnDef="rol">
+        <mat-header-cell *matHeaderCellDef> Rol
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> 
+           
+            <button [ngClass]="{
+                'table-success': kayit.rol === 'Yazar',
+                  'table-danger': kayit.rol === 'Beklemede',
+                  'table-primary': kayit.rol === 'Admin'}" mat-raised-button (click)="this.durumGuncelle(kayit.uyeid,kayit.rol)">Değiştir</button> &nbsp;&nbsp;
+          <div style="width: 90px;">  {{kayit.rol}} </div>
+         
+                    </mat-cell>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="adsoyad">
+        <mat-header-cell *matHeaderCellDef> Ad Soyad
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.adsoyad}} </mat-cell>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="haberAlan">
+        <mat-header-cell *matHeaderCellDef> Haber Alan
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberAlan}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="haberSayisi">
+        <mat-header-cell *matHeaderCellDef> Haber Sayısı
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberSayisi}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="konum">
+        <mat-header-cell *matHeaderCellDef> Konum
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.konum}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="mail">
+        <mat-header-cell *matHeaderCellDef> Mail
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.mail}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telefon">
+        <mat-header-cell *matHeaderCellDef> Telefon
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.telefon}} </mat-cell>
+    </ng-container>
+
+
+  
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+</mat-table>

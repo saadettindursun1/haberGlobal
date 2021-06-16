@@ -1,0 +1,96 @@
+<div class="mt-5">
+
+  <div class="col-md-3 mr-5">
+
+    <h2 class="baslik text-center">YAZAR GİRİŞİ</h2><hr>
+    <form class="example-form">
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Mail Adresi</mat-label>
+          <input type="mail" matInput placeholder="mail@mail.com" name="GirisMail" #GirisMail>
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Parola</mat-label>
+            <input type="password" matInput placeholder="*******" name="GirisParola" #GirisParola>
+            <mat-icon matSuffix>password</mat-icon>
+          </mat-form-field>
+          <br>
+
+        
+            <button mat-raised-button class="example-full-width" color="warn" (click)="this.uyeGiris(GirisMail.value,GirisParola.value)">Giriş Yap</button>
+     
+
+      </form>
+<br>
+      <div class="alert alert-warning" role="alert" *ngIf="durum">
+        {{mesaj}}
+      </div>
+
+
+    </div>
+
+    <div class="col-md-8">
+
+    <h2 class="baslik" style="margin-left:20%;">YAZAR KAYIT FORMU</h2><hr>
+    <form ngForm="ngForm">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Ad Soyad</mat-label>
+            <input type="text" matInput placeholder="mail@mail.com" name="adsoyad" [(ngModel)]="uye.adsoyad" >
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Telefon</mat-label>
+            <input type="text" matInput placeholder="+90 --- --- -- --" name="telefon" [(ngModel)]="uye.telefon" >
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Mail Adresi</mat-label>
+          <input type="mail" matInput placeholder="mail@mail.com" name="mail" [(ngModel)]="uye.mail" >
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Parola</mat-label>
+            <input type="password" matInput placeholder="*******" name="parola" [(ngModel)]="uye.parola" >
+            <mat-icon matSuffix>password</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Habercilik Alanınızı Seçiniz..</mat-label>
+            <mat-select  name="haberAlan" [(ngModel)]="uye.haberAlan" >
+              <mat-option *ngFor="let item of kategorilerim" value="{{item.kategoriAdi}}">{{item.kategoriAdi}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Şehir Seçiniz..</mat-label>
+            <mat-select name="konum" [(ngModel)]="uye.konum" >
+              <mat-option *ngFor="let item of sehirlerim" value="{{item.sehirIsim}}" (click)="this.ilceListele(item.sehirId);this.ilceDurum=true">{{item.sehirIsim}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="this.ilceDurum" appearance="fill" class="example-full-width">
+            <mat-label>İlçe Seçiniz..</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of ilcelerim" value="item.ilceId">{{item.ilceIsim}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+
+        
+            <button mat-raised-button class="example-full-width" color="warn" (click)="this.uyeEkle()">Kayıt Ol</button>
+     {{this.sonucum.mesaj}}
+
+      </form>
+
+
+    </div>
+
+
+
+  </div>

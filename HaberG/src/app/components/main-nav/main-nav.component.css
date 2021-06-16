@@ -1,0 +1,47 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.kategori {
+  color: rgba(196, 3, 3, 0.767);
+}
+.kategori:hover {
+  background-color: lightgrey;
+}
+.ustmenu {
+  background-color: rgba(196, 3, 3, 0.767);
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 35px;
+}
+.yazarGiris {
+  font-size: 20px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.fontMontserrat {
+  font-family: "Montserrat" sans-serif;
+  margin-left: 9px;
+  font-size: 17px;
+  opacity: 70%;
+}
+.iletisim {
+  background-color: gray;
+  height: 38px;
+  text-align: center;
+  position: relative;
+}

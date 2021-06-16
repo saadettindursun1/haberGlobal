@@ -1,0 +1,16 @@
+<div class="justify-content-center align-items-center">
+    <div class="col-md-12 mb-5">
+        <div class="altBaslik mt-5  text-center" style="background-color: rgba(138, 150, 144, 0.822);">
+        <span class="kategori"> {{this.kategori}} </span>
+        </div>
+    </div>
+    
+     <div *ngFor="let item of haberlerim" class="col-md-3">  <div class="col-md-12 card  mt-5 ">
+    <div class="card-title text-center mt-3"> <img  style="height: 120px;"  [src]="'https://localhost:44321/Resimler/'+item.haberResim" ></div>
+    <div class="card-body text-center"><strong>{{item.haberBaslik}}</strong> <br> {{item.haberOkunma}} kez okundu..
+    </div>
+    <div class="card-footer"><button class="btn btn-lg btn-outline-danger btn-block" routerLink="../../haberDetay/{{item.haberId}}">Detaya Git</button></div>
+    
+    </div>
+</div>  
+</div>

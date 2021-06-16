@@ -1,0 +1,63 @@
+<hr>
+<button mat-flat-button color="accent" routerLink="../adminEkran" style="margin-left:40px;">Geri Dön</button><hr>
+<br>
+  <mat-table [dataSource]="haberlerim">
+
+
+  
+
+    <ng-container matColumnDef="haberKategoriAdi">
+        <mat-header-cell *matHeaderCellDef> Kategori
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberKategoriadi}} </mat-cell>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="haberBaslik">
+        <mat-header-cell *matHeaderCellDef> Başlık
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberBaslik}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="haberOkunma">
+        <mat-header-cell *matHeaderCellDef> Okunma
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberOkunma}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="haberResim">
+        <mat-header-cell *matHeaderCellDef> haberResim
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit">
+            
+            <img style="height: 50px;width:80px;" [src]="'https://localhost:44321/Resimler/'+kayit.haberResim"> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="haberTarih">
+        <mat-header-cell *matHeaderCellDef> Tarih
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberTarih}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="yazarlar">
+        <mat-header-cell *matHeaderCellDef> Telefon
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit">{{kayit.yazarlar.adsoyad}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Silme">
+        <mat-header-cell *matHeaderCellDef> Sil
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> 
+            <button mat-raised-button color="warn" (click)="this.haberSil(kayit.haberId)">Sil</button> 
+     
+                    </mat-cell>
+    </ng-container>
+
+  
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+</mat-table>

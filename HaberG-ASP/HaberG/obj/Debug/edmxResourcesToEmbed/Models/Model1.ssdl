@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="habergModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Haberler">
+    <Key>
+      <PropertyRef Name="haberId" />
+    </Key>
+    <Property Name="haberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="haberKategori" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="haberBaslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="haberIcerik" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="haberResim" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="haberVideo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="haberTarih" Type="date" Nullable="false" />
+    <Property Name="haberOkunma" Type="int" Nullable="false" />
+    <Property Name="haberYazarId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HaberYorumlar">
+    <Key>
+      <PropertyRef Name="yorumId" />
+    </Key>
+    <Property Name="yorumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="yorumIcerik" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="yorumTarih" Type="date" Nullable="false" />
+    <Property Name="yorumHaberId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ilceler">
+    <Key>
+      <PropertyRef Name="ilceId" />
+    </Key>
+    <Property Name="ilceId" Type="int" Nullable="false" />
+    <Property Name="ilceIsim" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ilceSehirId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="iletisim">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iletisimMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="iletisimIcerik" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kategoriler">
+    <Key>
+      <PropertyRef Name="kategoriAdi" />
+    </Key>
+    <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kategoriAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sehirler">
+    <Key>
+      <PropertyRef Name="sehirId" />
+    </Key>
+    <Property Name="sehirId" Type="int" Nullable="false" />
+    <Property Name="sehirIsim" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="uyeler">
+    <Key>
+      <PropertyRef Name="uyeId" />
+    </Key>
+    <Property Name="uyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="parola" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="haberAlan" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="konum" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="rol" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="kayitTarih" Type="date" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Haberler_ToKategori">
+    <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+    <End Role="Haberler" Type="Self.Haberler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategoriler">
+        <PropertyRef Name="kategoriAdi" />
+      </Principal>
+      <Dependent Role="Haberler">
+        <PropertyRef Name="haberKategori" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Haberler_ToUyeler">
+    <End Role="uyeler" Type="Self.uyeler" Multiplicity="1" />
+    <End Role="Haberler" Type="Self.Haberler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="uyeler">
+        <PropertyRef Name="uyeId" />
+      </Principal>
+      <Dependent Role="Haberler">
+        <PropertyRef Name="haberYazarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HaberYorumlar_ToHaberler">
+    <End Role="Haberler" Type="Self.Haberler" Multiplicity="1" />
+    <End Role="HaberYorumlar" Type="Self.HaberYorumlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Haberler">
+        <PropertyRef Name="haberId" />
+      </Principal>
+      <Dependent Role="HaberYorumlar">
+        <PropertyRef Name="yorumHaberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ilceler_ToSehirler">
+    <End Role="Sehirler" Type="Self.Sehirler" Multiplicity="1" />
+    <End Role="ilceler" Type="Self.ilceler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sehirler">
+        <PropertyRef Name="sehirId" />
+      </Principal>
+      <Dependent Role="ilceler">
+        <PropertyRef Name="ilceSehirId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="habergModelStoreContainer">
+    <EntitySet Name="Haberler" EntityType="Self.Haberler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaberYorumlar" EntityType="Self.HaberYorumlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ilceler" EntityType="Self.ilceler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iletisim" EntityType="Self.iletisim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sehirler" EntityType="Self.Sehirler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="uyeler" EntityType="Self.uyeler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Haberler_ToKategori" Association="Self.FK_Haberler_ToKategori">
+      <End Role="Kategoriler" EntitySet="Kategoriler" />
+      <End Role="Haberler" EntitySet="Haberler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Haberler_ToUyeler" Association="Self.FK_Haberler_ToUyeler">
+      <End Role="uyeler" EntitySet="uyeler" />
+      <End Role="Haberler" EntitySet="Haberler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HaberYorumlar_ToHaberler" Association="Self.FK_HaberYorumlar_ToHaberler">
+      <End Role="Haberler" EntitySet="Haberler" />
+      <End Role="HaberYorumlar" EntitySet="HaberYorumlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ilceler_ToSehirler" Association="Self.FK_ilceler_ToSehirler">
+      <End Role="Sehirler" EntitySet="Sehirler" />
+      <End Role="ilceler" EntitySet="ilceler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

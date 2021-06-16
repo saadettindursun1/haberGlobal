@@ -1,0 +1,27 @@
+<div class="container col-md-5">
+    <mat-card class="orta">
+        <mat-card-header><h2>ADMİN GİRİŞ</h2></mat-card-header>
+        <mat-card-content>
+            
+    <mat-form-field class="example-full-width">
+        <mat-label>E Mail</mat-label>
+        <input type="mail" matInput placeholder="Mail" name="haberBaslik" #mail required>
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width">
+        <mat-label>Parola</mat-label>
+        <input type="password" matInput placeholder="Parola" name="haberİcerik" #parola required>
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+        </mat-card-content>
+        <mat-card-footer>
+            <button mat-flat-button color="primary" class="btn-block" (click)="this.adminGiris(mail.value,parola.value)">GİRİŞ YAP</button>
+        </mat-card-footer>
+
+    </mat-card>
+    <br>
+    <div class="alert alert-warning" role="alert" *ngIf="this.durum">
+      {{mesaj}}
+    </div>
+</div>

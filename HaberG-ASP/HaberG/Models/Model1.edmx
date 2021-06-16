@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="habergModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Haberler">
+          <Key>
+            <PropertyRef Name="haberId" />
+          </Key>
+          <Property Name="haberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="haberKategori" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="haberBaslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="haberIcerik" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="haberResim" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="haberVideo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="haberTarih" Type="date" Nullable="false" />
+          <Property Name="haberOkunma" Type="int" Nullable="false" />
+          <Property Name="haberYazarId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HaberYorumlar">
+          <Key>
+            <PropertyRef Name="yorumId" />
+          </Key>
+          <Property Name="yorumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yorumIcerik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="yorumTarih" Type="date" Nullable="false" />
+          <Property Name="yorumHaberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ilceler">
+          <Key>
+            <PropertyRef Name="ilceId" />
+          </Key>
+          <Property Name="ilceId" Type="int" Nullable="false" />
+          <Property Name="ilceIsim" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ilceSehirId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="iletisim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iletisimMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="iletisimIcerik" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="kategoriAdi" />
+          </Key>
+          <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sehirler">
+          <Key>
+            <PropertyRef Name="sehirId" />
+          </Key>
+          <Property Name="sehirId" Type="int" Nullable="false" />
+          <Property Name="sehirIsim" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="uyeler">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="parola" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="haberAlan" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="konum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="kayitTarih" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Haberler_ToKategori">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="Haberler" Type="Self.Haberler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="kategoriAdi" />
+            </Principal>
+            <Dependent Role="Haberler">
+              <PropertyRef Name="haberKategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Haberler_ToUyeler">
+          <End Role="uyeler" Type="Self.uyeler" Multiplicity="1" />
+          <End Role="Haberler" Type="Self.Haberler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uyeler">
+              <PropertyRef Name="uyeId" />
+            </Principal>
+            <Dependent Role="Haberler">
+              <PropertyRef Name="haberYazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HaberYorumlar_ToHaberler">
+          <End Role="Haberler" Type="Self.Haberler" Multiplicity="1" />
+          <End Role="HaberYorumlar" Type="Self.HaberYorumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Haberler">
+              <PropertyRef Name="haberId" />
+            </Principal>
+            <Dependent Role="HaberYorumlar">
+              <PropertyRef Name="yorumHaberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilceler_ToSehirler">
+          <End Role="Sehirler" Type="Self.Sehirler" Multiplicity="1" />
+          <End Role="ilceler" Type="Self.ilceler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehirler">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="ilceler">
+              <PropertyRef Name="ilceSehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="habergModelStoreContainer">
+          <EntitySet Name="Haberler" EntityType="Self.Haberler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HaberYorumlar" EntityType="Self.HaberYorumlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ilceler" EntityType="Self.ilceler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iletisim" EntityType="Self.iletisim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sehirler" EntityType="Self.Sehirler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uyeler" EntityType="Self.uyeler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Haberler_ToKategori" Association="Self.FK_Haberler_ToKategori">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Haberler" EntitySet="Haberler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haberler_ToUyeler" Association="Self.FK_Haberler_ToUyeler">
+            <End Role="uyeler" EntitySet="uyeler" />
+            <End Role="Haberler" EntitySet="Haberler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HaberYorumlar_ToHaberler" Association="Self.FK_HaberYorumlar_ToHaberler">
+            <End Role="Haberler" EntitySet="Haberler" />
+            <End Role="HaberYorumlar" EntitySet="HaberYorumlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilceler_ToSehirler" Association="Self.FK_ilceler_ToSehirler">
+            <End Role="Sehirler" EntitySet="Sehirler" />
+            <End Role="ilceler" EntitySet="ilceler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="habergModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Haberler">
+          <Key>
+            <PropertyRef Name="haberId" />
+          </Key>
+          <Property Name="haberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="haberKategori" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="haberBaslik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="haberIcerik" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="haberResim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="haberVideo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="haberTarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="haberOkunma" Type="Int32" Nullable="false" />
+          <Property Name="haberYazarId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kategoriler" Relationship="Self.FK_Haberler_ToKategori" FromRole="Haberler" ToRole="Kategoriler" />
+          <NavigationProperty Name="uyeler" Relationship="Self.FK_Haberler_ToUyeler" FromRole="Haberler" ToRole="uyeler" />
+          <NavigationProperty Name="HaberYorumlar" Relationship="Self.FK_HaberYorumlar_ToHaberler" FromRole="Haberler" ToRole="HaberYorumlar" />
+        </EntityType>
+        <EntityType Name="HaberYorumlar">
+          <Key>
+            <PropertyRef Name="yorumId" />
+          </Key>
+          <Property Name="yorumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yorumIcerik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="yorumTarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="yorumHaberId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Haberler" Relationship="Self.FK_HaberYorumlar_ToHaberler" FromRole="HaberYorumlar" ToRole="Haberler" />
+        </EntityType>
+        <EntityType Name="ilceler">
+          <Key>
+            <PropertyRef Name="ilceId" />
+          </Key>
+          <Property Name="ilceId" Type="Int32" Nullable="false" />
+          <Property Name="ilceIsim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ilceSehirId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sehirler" Relationship="Self.FK_ilceler_ToSehirler" FromRole="ilceler" ToRole="Sehirler" />
+        </EntityType>
+        <EntityType Name="iletisim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iletisimMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="iletisimIcerik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="kategoriAdi" />
+          </Key>
+          <Property Name="kategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Haberler" Relationship="Self.FK_Haberler_ToKategori" FromRole="Kategoriler" ToRole="Haberler" />
+        </EntityType>
+        <EntityType Name="Sehirler">
+          <Key>
+            <PropertyRef Name="sehirId" />
+          </Key>
+          <Property Name="sehirId" Type="Int32" Nullable="false" />
+          <Property Name="sehirIsim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ilceler" Relationship="Self.FK_ilceler_ToSehirler" FromRole="Sehirler" ToRole="ilceler" />
+        </EntityType>
+        <EntityType Name="uyeler">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adsoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="parola" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="haberAlan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="konum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kayitTarih" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Haberler" Relationship="Self.FK_Haberler_ToUyeler" FromRole="uyeler" ToRole="Haberler" />
+        </EntityType>
+        <Association Name="FK_Haberler_ToKategori">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="Haberler" Type="Self.Haberler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="kategoriAdi" />
+            </Principal>
+            <Dependent Role="Haberler">
+              <PropertyRef Name="haberKategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Haberler_ToUyeler">
+          <End Role="uyeler" Type="Self.uyeler" Multiplicity="1" />
+          <End Role="Haberler" Type="Self.Haberler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uyeler">
+              <PropertyRef Name="uyeId" />
+            </Principal>
+            <Dependent Role="Haberler">
+              <PropertyRef Name="haberYazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HaberYorumlar_ToHaberler">
+          <End Role="Haberler" Type="Self.Haberler" Multiplicity="1" />
+          <End Role="HaberYorumlar" Type="Self.HaberYorumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Haberler">
+              <PropertyRef Name="haberId" />
+            </Principal>
+            <Dependent Role="HaberYorumlar">
+              <PropertyRef Name="yorumHaberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilceler_ToSehirler">
+          <End Role="Sehirler" Type="Self.Sehirler" Multiplicity="1" />
+          <End Role="ilceler" Type="Self.ilceler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehirler">
+              <PropertyRef Name="sehirId" />
+            </Principal>
+            <Dependent Role="ilceler">
+              <PropertyRef Name="ilceSehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="habergEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Haberler" EntityType="Self.Haberler" />
+          <EntitySet Name="HaberYorumlar" EntityType="Self.HaberYorumlar" />
+          <EntitySet Name="ilceler" EntityType="Self.ilceler" />
+          <EntitySet Name="iletisim" EntityType="Self.iletisim" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" />
+          <EntitySet Name="Sehirler" EntityType="Self.Sehirler" />
+          <EntitySet Name="uyeler" EntityType="Self.uyeler" />
+          <AssociationSet Name="FK_Haberler_ToKategori" Association="Self.FK_Haberler_ToKategori">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Haberler" EntitySet="Haberler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haberler_ToUyeler" Association="Self.FK_Haberler_ToUyeler">
+            <End Role="uyeler" EntitySet="uyeler" />
+            <End Role="Haberler" EntitySet="Haberler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HaberYorumlar_ToHaberler" Association="Self.FK_HaberYorumlar_ToHaberler">
+            <End Role="Haberler" EntitySet="Haberler" />
+            <End Role="HaberYorumlar" EntitySet="HaberYorumlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilceler_ToSehirler" Association="Self.FK_ilceler_ToSehirler">
+            <End Role="Sehirler" EntitySet="Sehirler" />
+            <End Role="ilceler" EntitySet="ilceler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="habergModelStoreContainer" CdmEntityContainer="habergEntities1">
+          <EntitySetMapping Name="Haberler">
+            <EntityTypeMapping TypeName="habergModel.Haberler">
+              <MappingFragment StoreEntitySet="Haberler">
+                <ScalarProperty Name="haberId" ColumnName="haberId" />
+                <ScalarProperty Name="haberKategori" ColumnName="haberKategori" />
+                <ScalarProperty Name="haberBaslik" ColumnName="haberBaslik" />
+                <ScalarProperty Name="haberIcerik" ColumnName="haberIcerik" />
+                <ScalarProperty Name="haberResim" ColumnName="haberResim" />
+                <ScalarProperty Name="haberVideo" ColumnName="haberVideo" />
+                <ScalarProperty Name="haberTarih" ColumnName="haberTarih" />
+                <ScalarProperty Name="haberOkunma" ColumnName="haberOkunma" />
+                <ScalarProperty Name="haberYazarId" ColumnName="haberYazarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HaberYorumlar">
+            <EntityTypeMapping TypeName="habergModel.HaberYorumlar">
+              <MappingFragment StoreEntitySet="HaberYorumlar">
+                <ScalarProperty Name="yorumId" ColumnName="yorumId" />
+                <ScalarProperty Name="yorumIcerik" ColumnName="yorumIcerik" />
+                <ScalarProperty Name="yorumTarih" ColumnName="yorumTarih" />
+                <ScalarProperty Name="yorumHaberId" ColumnName="yorumHaberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ilceler">
+            <EntityTypeMapping TypeName="habergModel.ilceler">
+              <MappingFragment StoreEntitySet="ilceler">
+                <ScalarProperty Name="ilceId" ColumnName="ilceId" />
+                <ScalarProperty Name="ilceIsim" ColumnName="ilceIsim" />
+                <ScalarProperty Name="ilceSehirId" ColumnName="ilceSehirId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iletisim">
+            <EntityTypeMapping TypeName="habergModel.iletisim">
+              <MappingFragment StoreEntitySet="iletisim">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="iletisimMail" ColumnName="iletisimMail" />
+                <ScalarProperty Name="iletisimIcerik" ColumnName="iletisimIcerik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoriler">
+            <EntityTypeMapping TypeName="habergModel.Kategoriler">
+              <MappingFragment StoreEntitySet="Kategoriler">
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+                <ScalarProperty Name="kategoriAdi" ColumnName="kategoriAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sehirler">
+            <EntityTypeMapping TypeName="habergModel.Sehirler">
+              <MappingFragment StoreEntitySet="Sehirler">
+                <ScalarProperty Name="sehirId" ColumnName="sehirId" />
+                <ScalarProperty Name="sehirIsim" ColumnName="sehirIsim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uyeler">
+            <EntityTypeMapping TypeName="habergModel.uyeler">
+              <MappingFragment StoreEntitySet="uyeler">
+                <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+                <ScalarProperty Name="adsoyad" ColumnName="adsoyad" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="parola" ColumnName="parola" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="haberAlan" ColumnName="haberAlan" />
+                <ScalarProperty Name="konum" ColumnName="konum" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="kayitTarih" ColumnName="kayitTarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

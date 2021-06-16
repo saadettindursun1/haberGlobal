@@ -1,0 +1,42 @@
+<hr>
+<button mat-flat-button color="accent" routerLink="../yazarEkran" style="margin-left:40px;">Geri Dön</button><hr>
+<br>
+
+<form #frm="ngForm" >
+  <div class="alert alert-success h3" *ngIf="!rolDurum" role="alert"><br>
+    Sistemde ki rolünüz henüz yazar olarak tanımlanamdığı için 
+    haber paylaşımı yapamazsınız. <hr>
+  </div>
+<div class="kayit" *ngIf="rolDurum">
+    <h2 class="baslik" style="margin-left:30%;">HABER PAYLAŞIM EKRANI</h2><hr>
+   
+    <mat-form-field class="example-full-width">
+      <mat-label>Haber Başlığı</mat-label>
+      <input type="mail" matInput placeholder="Haber Başlığı" name="haberBaslik" #haberBaslik required>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    
+  
+<textarea name="icerik" class="form-control btn-lg" id="" cols="30" rows="4" placeholder="Haber İçeriği.." #habericerik></textarea>    
+   
+<br>
+
+          <!--<img [src]="'https://localhost:44321/Resimler/sagKose.jpg'" alt="">
+           -->
+           <input type="file" (change)="onFileSelected($event)" #fileSec style="display: none;">
+           <button mat-raised-button color="accent" (click)="fileSec.click()">Fotoğraf Seç</button> ( Önerilen Fotoğraf Boyutu 768x100px )
+           <br><br>
+         
+            <button mat-raised-button class="example-full-width" color="warn" [disabled]="frm.form.invalid" (click)="
+            haberim.haberBaslik=haberBaslik.value;
+            haberim.haberIcerik=habericerik.value;
+            ;onUpload()">Haberi Paylaş</button><hr>
+            <div *ngIf="sonucum.islem">{{sonucum.mesaj}}</div>
+            <hr>
+            <div *ngIf="this.fotoDurum">
+              <h3>Haberiniz İçin Seçtiğiniz Fotoğraf</h3>
+            <img [src]="this.urlLink" alt="" style="height: 400px;width: auto;"><br>
+            </div><hr><hr>
+       
+</div>
+</form>

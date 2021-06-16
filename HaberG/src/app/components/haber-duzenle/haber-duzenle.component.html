@@ -1,0 +1,89 @@
+<hr>
+<button mat-flat-button color="accent" routerLink="../yazarEkran" style="margin-left:40px;">Geri Dön</button><hr>
+<br>
+
+<div class="col-md-12" *ngIf="durum">
+    <form ngform="ngForm">
+    <div class="card">
+        <div class="card-header text-center"><h2>Haber Düzenleme Ekranı</h2></div>
+        <div class="card-body">
+           <div class="form-group">
+            <label>Haber Başlığı</label>   
+            <input type="text" name="baslik" class="form-control btn-lg" value="{{bilgi}}" #baslik></div>
+           <div class="form-group">
+            <label>Haber İçeriği</label>   
+
+               <textarea name="" id="" class="form-control" cols="30" rows="4" value="{{bilgi2}}" #icerik></textarea></div>
+           <div class="form-group"><button class="btn btn-success btn-lg btn-block" (click)="this.haberGuncelle(baslik.value,icerik.value)">Güncelle</button></div>
+           <br>
+           <div class="alert alert-primary" role="alert" *ngIf="guncellemeDurum">
+            {{guncellemeMesaj}}
+        </div>
+           <div class="form-group">
+               <img [src]="'https://localhost:44321/Resimler/'+bilgi3"  style="height: 100px;width:150px;">
+           </div>
+        </div>
+    </div>
+  
+</form>
+<hr><br>
+</div>
+
+<div class="col-md-12">
+<mat-table [dataSource]="haber">
+
+
+
+  
+    <ng-container matColumnDef="haberBaslik">
+        <mat-header-cell *matHeaderCellDef> Başlık
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberBaslik}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="haberOkunma">
+        <mat-header-cell *matHeaderCellDef> Okunma
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberOkunma}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="haberResim">
+        <mat-header-cell *matHeaderCellDef> haberResim
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit">
+            
+            <img style="height: 50px;width:80px;" [src]="'https://localhost:44321/Resimler/'+kayit.haberResim"> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="haberTarih">
+        <mat-header-cell *matHeaderCellDef> Tarih
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.haberTarih.replace('/Date(','').replace(')/','') | date:"dd/MM/yyyy"}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="duzenle">
+        <mat-header-cell *matHeaderCellDef> Düzenle
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> 
+            <button mat-raised-button color="accent" (click)="this.haberListele2(kayit.haberId)">Düzenle</button> 
+     
+                    </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Silme">
+        <mat-header-cell *matHeaderCellDef> Sil
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> 
+            <button mat-raised-button color="warn" (click)="this.haberSil(kayit.haberId)">Sil</button> 
+     
+                    </mat-cell>
+    </ng-container>
+
+  
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+</mat-table>
+</div>

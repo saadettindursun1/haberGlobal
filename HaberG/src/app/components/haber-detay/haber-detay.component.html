@@ -1,0 +1,39 @@
+<hr>
+<button mat-flat-button color="accent" routerLink="/" class="ml-5 btn-lg">Geri Dön</button><hr>
+<br>
+
+<div class="col-md-12" *ngFor="let item of haber">
+    
+    <div class="col-md-6">
+        {{item.haberOkunma}} kez okundu
+    <div class="alert alert-dark text-center" role="alert">
+    
+        <span style="font-size: 30x;" class="text-center h1">{{item.haberBaslik}}</span>
+    </div>
+        <img [src]="'https://localhost:44321/Resimler/'+item.haberResim" alt="">   
+</div>
+
+<div class="col-md-6 mt-3">
+   <h2> <span class="float-left">{{item.haberKategoriadi}}</span> </h2>
+    <span class="float-right">{{item.haberTarih}}</span>
+    <br><br><hr>
+<p style="height: 200px;overflow: scroll;" >
+   {{item.haberIcerik}}</p>
+
+<textarea name="yorum" class="form-control" style="font-size: 15px;"  cols="30" rows="3" #yorum></textarea><br>
+<button class="btn btn-success btn-block btn-lg" (click)="yorumYap(yorum.value)">Yorum Yap</button>
+<div class="alert alert-success text-dark"  *ngIf="sonucum.islem">
+    {{sonucum.mesaj}}
+</div>
+</div>
+<div class="col-md-12 mt-5">
+    <div class="alert alert-danger text-dark text-center">
+        <span style="font-size: 30x;" class="text-center h1">Yorumlar</span>
+    </div>
+    <div class="col-md-12 alert" style="background-color: rgb(228, 227, 227);" *ngFor="let item of yorumlar">
+        <strong>{{item.yorumIcerik}}</strong> <span class="float-right">{{item.yorumTarih}}</span>
+    </div>
+</div><br>
+
+
+</div>
